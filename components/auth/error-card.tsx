@@ -1,7 +1,4 @@
-import { Card, CardFooter, CardHeader } from "../ui/card";
-import { BackButton } from "./back-button";
 import { CardWrapper } from "./card-wrapper";
-import { Header } from "./header";
 import { FiAlertTriangle } from "react-icons/fi";
 
 export const ErrorCard = () => {
