@@ -31,7 +31,6 @@ import React from "react";
 import { auth } from "@/auth";
 import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
-import { GoToAdminPage } from "@/components/auth/go-to-admin";
 
 const SettingsPage = async () => {
   const session = await auth();
@@ -52,7 +51,6 @@ const SettingsPage = async () => {
       >
         <Button>Sign Out</Button>
       </form>
-      <GoToAdminPage />
     </div>
   );
 };
