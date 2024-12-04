@@ -41,6 +41,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       //Allow 0Auth:github without email verification
       if (account?.provider !== "credentials") return true;
 
+      //@ts-ignore
       const existingUser = await getUserById(user.id);
 
       //Prevent sigin in without email verification
