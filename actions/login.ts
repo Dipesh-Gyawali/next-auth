@@ -12,6 +12,7 @@ import {
 } from "@/lib/tokens";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { LoginSchema } from "@/schemas";
+import { compare } from "bcryptjs";
 import { AuthError } from "next-auth";
 import * as z from "zod";
 
@@ -46,6 +47,13 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return { success: "Confirmation email sent!" };
   }
 
+  // **Verify Password First**
+  const isPasswordValid = await compare(password, existingUser.password); // Assume verifyPassword is your password hashing comparison function.
+  if (!isPasswordValid) {
+    return { error: "Invalid credentials!" };
+  }
+
+  // **Proceed to 2FA Only If Password is Correct**
   //for 2FA
   if (existingUser?.isTwoFactorEnabled && existingUser?.email) {
     if (code) {
