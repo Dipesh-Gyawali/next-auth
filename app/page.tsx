@@ -8,7 +8,7 @@ export default function Home() {
       <p>A simple authentication service</p>
       <br />
       <LoginButton>
-        <Button variant="secondary">Sign in</Button>
+        <Button variant="secondary">Sign in.</Button>
       </LoginButton>
     </div>
   );
