@@ -5,9 +5,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { socket } from "@/lib/socketClient";
+import { ProtectedRouteForAdmin } from "@/ProtectedRoute";
+import { UserRole } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { FaCommentDots } from "react-icons/fa";
+import { RoleGate } from "./auth/role-gate";
 
 export const Header = () => {
   const [notification, setNotification] = useState([
@@ -50,35 +53,40 @@ export const Header = () => {
     <nav className="bg-blue-200 p-3 flex flex-row items-center justify-end gap-5">
       <div className="flex flex-row items-center justify-center">
         {/* Input for admin */}
-        <div className="flex flex-row gap-4 mt-5">
-          <input
-            type="text"
-            className="border border-black-500 rounded-md"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-          />
-          <button
-            className="border-none bg-slate-400 p-2 rounded-lg"
-            onClick={handleAddEvent}
-          >
-            Add Event
-          </button>
-        </div>
+        {UserRole.ADMIN ? (
+          <>
+            <div className="flex flex-row gap-4 mt-5">
+              <input
+                type="text"
+                className="border border-black-500 rounded-md"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+              />
+              <button
+                className="border-none bg-slate-400 p-2 rounded-lg"
+                onClick={handleAddEvent}
+              >
+                Add Event
+              </button>
+            </div>
+          </>
+        ) : null}
+
         <div className="m-3 pt-3">
           <Popover>
             <PopoverTrigger>
-              <div className="relative flex items-center justify-center w-20 h-20 rounded-full border-2 border-gray-300 bg-white shadow-lg hover:shadow-xl transition-shadow duration-200">
+              <div className="relative flex items-center justify-center w-14 h-14 rounded-full border border-gray-300 bg-white shadow-md hover:shadow-lg transition-shadow duration-200">
                 {/* Notification Icon */}
-                <div className="absolute top-2 right-2 bg-blue-500 text-white p-2 rounded-full shadow-md hover:bg-blue-600 transition-colors duration-200">
-                  <FaCommentDots className="w-5 h-5" />
+                <div className="absolute top-1.5 right-1.5 bg-blue-500 text-white p-1 rounded-full shadow hover:bg-blue-600 transition-colors duration-200">
+                  <FaCommentDots className="w-4 h-4" />
                 </div>
 
                 {/* Bell Icon */}
-                <FaRegBell className="w-10 h-10 text-blue-500" />
+                <FaRegBell className="w-6 h-6 text-blue-500" />
 
                 {/* Count Badge */}
                 {count > 0 && (
-                  <div className="absolute bottom-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                  <div className="absolute bottom-1.5 right-1.5 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
                     {count}
                   </div>
                 )}
