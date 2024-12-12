@@ -9,12 +9,12 @@ import { FaRegBell } from "react-icons/fa";
 
 export const Header = () => {
   const twid = Date.now().toString();
-  const [count, setCount] = useState(3);
   const [notification, setNotification] = useState([
     { id: "1", notificationMsg: "This is tihar event" },
     { id: "2", notificationMsg: "This is dashain event" },
     { id: "3", notificationMsg: "This is holi event" },
   ]);
+  const [count, setCount] = useState(notification.length);
   const [inputMessage, setInputMessage] = useState("");
 
   const handleAddEvent = () => {
