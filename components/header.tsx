@@ -4,12 +4,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useId, useState } from "react";
+import { useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 
 export const Header = () => {
   const twid = Date.now().toString();
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(3);
   const [notification, setNotification] = useState([
     { id: "1", notificationMsg: "This is tihar event" },
     { id: "2", notificationMsg: "This is dashain event" },
