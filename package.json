@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "5.22.0",
     "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "aws-sdk": "^2.1692.0",
     "babel-preset-es2015": "^6.24.1",

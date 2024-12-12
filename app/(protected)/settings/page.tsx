@@ -31,6 +31,7 @@ import React from "react";
 import { auth } from "@/auth";
 import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import { Header } from "@/components/header";
 
 const SettingsPage = async () => {
   const session = await auth();
@@ -39,6 +40,8 @@ const SettingsPage = async () => {
   // session.user.image
   return (
     <div>
+      <Header />
+
       <div>{JSON.stringify(session)}</div>
       <div className="border border-red-500 w-fit m-2">
         isTwoFactorEnabled: {session?.user.isTwoFactorEnabled ? "ON" : "OFF"}
