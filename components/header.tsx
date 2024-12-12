@@ -7,6 +7,7 @@ import {
 import { socket } from "@/lib/socketClient";
 import { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
+import { FaCommentDots } from "react-icons/fa";
 
 export const Header = () => {
   const [notification, setNotification] = useState([
@@ -16,6 +17,7 @@ export const Header = () => {
   ]);
   const [count, setCount] = useState(notification.length);
   const [inputMessage, setInputMessage] = useState("");
+  const [popUp, setpopUp] = useState(false);
 
   useEffect(() => {
     //3
@@ -65,9 +67,21 @@ export const Header = () => {
         <div className="m-3 pt-3">
           <Popover>
             <PopoverTrigger>
-              <div className="flex flex-row">
-                <FaRegBell />
-                {count}
+              <div className="relative flex items-center justify-center w-20 h-20 rounded-full border-2 border-gray-300 bg-white shadow-lg hover:shadow-xl transition-shadow duration-200">
+                {/* Notification Icon */}
+                <div className="absolute top-2 right-2 bg-blue-500 text-white p-2 rounded-full shadow-md hover:bg-blue-600 transition-colors duration-200">
+                  <FaCommentDots className="w-5 h-5" />
+                </div>
+
+                {/* Bell Icon */}
+                <FaRegBell className="w-10 h-10 text-blue-500" />
+
+                {/* Count Badge */}
+                {count > 0 && (
+                  <div className="absolute bottom-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                    {count}
+                  </div>
+                )}
               </div>
             </PopoverTrigger>
             <PopoverContent>
@@ -84,3 +98,13 @@ export const Header = () => {
     </nav>
   );
 };
+
+{
+  /* <div className="relative flex flex-row border border-red-500">
+                <div className="absolute top-0 right-0">
+                  <FaCommentDots />
+                </div>
+                <FaRegBell className="h-14" />
+                <div className="absolute bottom-0 right-0 ml-4">{count}</div>
+              </div> */
+}
