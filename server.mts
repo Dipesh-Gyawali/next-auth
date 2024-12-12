@@ -18,21 +18,15 @@ app.prepare().then(() => {
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
+    //2
     // Store role when the client registers
     socket.on("register_role", ({ role }) => {
       console.log(role, "2222222");
-      roles[socket.id] = role;
+      roles[socket.id] = role; //mathi roles = {} lai populate gareko
       console.log(`User ${socket.id} registered as ${role}`);
     });
 
-    // //2
-    // // Handle new notifications and broadcast them
-    // socket.on("send_notification", (newNotification) => {
-    //   console.log("New notification:", newNotification);
-    //   io.emit("send_notification", newNotification); // Broadcast to all clients
-    // });
-
-    //2
+    //5
     // Handle new notifications, excluding the admin
     socket.on("send_notification", (newNotification) => {
       console.log("New notification:", newNotification);

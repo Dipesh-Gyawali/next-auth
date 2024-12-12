@@ -20,18 +20,19 @@ export const Header = ({ userRole }: { userRole: any }) => {
   const [inputMessage, setInputMessage] = useState("");
 
   useEffect(() => {
+    //sending notification to all users except admin
+    //1 see server.mts (total: 5 steps)
     // Register user role on connection
     socket.emit("register_role", { role: userRole });
 
-    //3
-    // Listen for new notifications from the server
+    //4
     socket.on("send_notification", (newNotification) => {
       setNotification((prev) => [...prev, newNotification]);
       setCount((prevCount) => prevCount + 1);
     });
 
     return () => {
-      socket.off("send_notification"); // Cleanup listener on unmount
+      socket.off("send_notification");
     };
   }, [userRole]);
 
@@ -42,8 +43,7 @@ export const Header = ({ userRole }: { userRole: any }) => {
       notificationMsg: inputMessage,
     };
 
-    // Emit only the new notification
-    //1 now see server.mts (total: 3 steps)
+    //3
     socket.emit("send_notification", newNotification);
 
     setInputMessage(""); // Clear input after sending
@@ -114,13 +114,3 @@ export const Header = ({ userRole }: { userRole: any }) => {
     </nav>
   );
 };
-
-{
-  /* <div className="relative flex flex-row border border-red-500">
-                <div className="absolute top-0 right-0">
-                  <FaCommentDots />
-                </div>
-                <FaRegBell className="h-14" />
-                <div className="absolute bottom-0 right-0 ml-4">{count}</div>
-              </div> */
-}
