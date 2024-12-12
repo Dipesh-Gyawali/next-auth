@@ -4,7 +4,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
+import { socket } from "@/lib/socketClient";
+import { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 
 export const Header = () => {
@@ -16,6 +17,15 @@ export const Header = () => {
   ]);
   const [count, setCount] = useState(notification.length);
   const [inputMessage, setInputMessage] = useState("");
+  const [notice, setNotice] = useState("");
+
+  useEffect(() => {
+    socket.emit("send_notification", notification);
+
+    // socket.on("send_notification", (msg) => {
+    //   setNotice(msg);
+    // });
+  }, []);
 
   const handleAddEvent = () => {
     if (!inputMessage.trim()) return;
@@ -26,8 +36,11 @@ export const Header = () => {
     console.log(data, "kkkkkkkkk");
     setNotification((prev) => [...prev, data]);
     setCount(notification.length);
-    setInputMessage("");
+    console.log(notification, "xxxxxxxxxx");
+    socket.emit("send_notification", notification);
+    // setInputMessage("");
   };
+  //   console.log(notice, "nnnnnnnn");
 
   return (
     <nav className="bg-blue-200 p-3 flex flex-row items-center justify-end gap-5">
@@ -57,7 +70,7 @@ export const Header = () => {
             <PopoverContent>
               {notification.map((item, index) => {
                 return (
-                  <ul key={index}>
+                  <ul key={index + 1}>
                     <li>{item.notificationMsg}</li>
                     <hr></hr>
                   </ul>

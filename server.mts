@@ -16,6 +16,12 @@ app.prepare().then(() => {
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
+    socket.on("send_notification", (msg) => {
+      console.log(msg, "555555");
+      console.log({ msg }, "666666");
+      io.emit("send_notification", msg);
+    });
+
     socket.on("disconnect", () => {
       console.log(`User disconnected: ${socket.id}`);
     });
