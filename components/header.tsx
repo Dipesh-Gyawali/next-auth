@@ -5,12 +5,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { socket } from "@/lib/socketClient";
-import { ProtectedRouteForAdmin } from "@/ProtectedRoute";
-import { UserRole } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { FaCommentDots } from "react-icons/fa";
-import { RoleGate } from "./auth/role-gate";
 
 export const Header = ({ userRole }: { userRole: any }) => {
   console.log(userRole, "mmmmmmmmmmmmmmmmmmmmmm");
@@ -50,58 +47,66 @@ export const Header = ({ userRole }: { userRole: any }) => {
   };
 
   return (
-    <nav className="bg-blue-200 p-3 flex flex-row items-center justify-end gap-5">
-      <div className="flex flex-row items-center justify-center">
+    <nav className="bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 p-4 flex flex-row items-center justify-between shadow-lg rounded-lg">
+      <div className="flex flex-row items-center gap-6">
         {/* Input for admin */}
-        {userRole === "ADMIN" ? (
-          <>
-            <div className="flex flex-row gap-4 mt-5">
-              <input
-                type="text"
-                className="border border-black-500 rounded-md"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-              />
-              <button
-                className="border-none bg-slate-400 p-2 rounded-lg"
-                onClick={handleAddEvent}
-              >
-                Add Event
-              </button>
-            </div>
-          </>
-        ) : null}
+        {userRole === "ADMIN" && (
+          <div className="flex flex-row gap-4 items-center">
+            <input
+              type="text"
+              className="border border-gray-400 rounded-md p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+              placeholder="Enter event message"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+            />
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition-all duration-200"
+              onClick={handleAddEvent}
+            >
+              Add Event
+            </button>
+          </div>
+        )}
+      </div>
 
-        <div className="m-3 pt-3">
-          <Popover>
-            <PopoverTrigger>
-              <div className="relative flex items-center justify-center w-14 h-14 rounded-full border border-gray-300 bg-white shadow-md hover:shadow-lg transition-shadow duration-200">
-                {/* Notification Icon */}
-                <div className="absolute top-1.5 right-1.5 bg-blue-500 text-white p-1 rounded-full shadow hover:bg-blue-600 transition-colors duration-200">
-                  <FaCommentDots className="w-4 h-4" />
-                </div>
-
-                {/* Bell Icon */}
-                <FaRegBell className="w-6 h-6 text-blue-500" />
-
-                {/* Count Badge */}
-                {count > 0 && (
-                  <div className="absolute bottom-1.5 right-1.5 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
-                    {count}
-                  </div>
-                )}
+      <div className="relative">
+        <Popover>
+          <PopoverTrigger>
+            <div className="relative flex items-center justify-center w-14 h-14 rounded-full border border-gray-300 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+              {/* Notification Icon */}
+              <div className="absolute top-1.5 right-1.5 bg-blue-500 text-white p-1 rounded-full shadow hover:bg-blue-600 transition-colors duration-200">
+                <FaCommentDots className="w-4 h-4" />
               </div>
-            </PopoverTrigger>
-            <PopoverContent>
-              {notification.map((item, index) => (
-                <ul key={item.id}>
-                  <li>{item.notificationMsg}</li>
-                  <hr />
+
+              {/* Bell Icon */}
+              <FaRegBell className="w-6 h-6 text-blue-500" />
+
+              {/* Count Badge */}
+              {count > 0 && (
+                <div className="absolute bottom-1.5 right-1.5 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-md">
+                  {count}
+                </div>
+              )}
+            </div>
+          </PopoverTrigger>
+
+          <PopoverContent className="bg-white p-4 shadow-lg rounded-lg w-72 border border-gray-200">
+            {notification.length > 0 ? (
+              notification.map((item, index) => (
+                <ul key={item.id} className="mb-2">
+                  <li className="text-sm text-gray-700">
+                    {item.notificationMsg}
+                  </li>
+                  {index < notification.length - 1 && (
+                    <hr className="my-2 border-gray-300" />
+                  )}
                 </ul>
-              ))}
-            </PopoverContent>
-          </Popover>
-        </div>
+              ))
+            ) : (
+              <p className="text-sm text-gray-500">No new notifications</p>
+            )}
+          </PopoverContent>
+        </Popover>
       </div>
     </nav>
   );
