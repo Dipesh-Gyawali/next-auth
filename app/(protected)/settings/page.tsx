@@ -40,7 +40,7 @@ const SettingsPage = async () => {
   // session.user.image
   return (
     <div>
-      <Header />
+      <Header userRole={session?.user?.role} />
 
       <div>{JSON.stringify(session)}</div>
       <div className="border border-red-500 w-fit m-2">

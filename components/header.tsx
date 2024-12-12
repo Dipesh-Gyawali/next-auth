@@ -12,7 +12,8 @@ import { FaRegBell } from "react-icons/fa";
 import { FaCommentDots } from "react-icons/fa";
 import { RoleGate } from "./auth/role-gate";
 
-export const Header = () => {
+export const Header = ({ userRole }: { userRole: any }) => {
+  console.log(userRole, "mmmmmmmmmmmmmmmmmmmmmm");
   const [notification, setNotification] = useState([
     { id: "1", notificationMsg: "This is tihar event" },
     { id: "2", notificationMsg: "This is dashain event" },
@@ -21,6 +22,7 @@ export const Header = () => {
   const [count, setCount] = useState(notification.length);
   const [inputMessage, setInputMessage] = useState("");
   const [popUp, setpopUp] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     //3
@@ -53,7 +55,7 @@ export const Header = () => {
     <nav className="bg-blue-200 p-3 flex flex-row items-center justify-end gap-5">
       <div className="flex flex-row items-center justify-center">
         {/* Input for admin */}
-        {UserRole.ADMIN ? (
+        {userRole === "ADMIN" ? (
           <>
             <div className="flex flex-row gap-4 mt-5">
               <input
