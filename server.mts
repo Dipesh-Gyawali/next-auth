@@ -16,6 +16,7 @@ app.prepare().then(() => {
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
+    //2
     // Handle new notifications and broadcast them
     socket.on("send_notification", (newNotification) => {
       console.log("New notification:", newNotification);

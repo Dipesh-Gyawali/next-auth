@@ -18,6 +18,7 @@ export const Header = () => {
   const [inputMessage, setInputMessage] = useState("");
 
   useEffect(() => {
+    //3
     // Listen for new notifications from the server
     socket.on("send_notification", (newNotification) => {
       setNotification((prev) => [...prev, newNotification]);
@@ -37,6 +38,7 @@ export const Header = () => {
     };
 
     // Emit only the new notification
+    //1 now see server.mts (total: 3 steps)
     socket.emit("send_notification", newNotification);
 
     setInputMessage(""); // Clear input after sending
