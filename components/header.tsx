@@ -21,8 +21,6 @@ export const Header = ({ userRole }: { userRole: any }) => {
   ]);
   const [count, setCount] = useState(notification.length);
   const [inputMessage, setInputMessage] = useState("");
-  const [popUp, setpopUp] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     //3
