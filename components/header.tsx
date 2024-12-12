@@ -20,6 +20,9 @@ export const Header = ({ userRole }: { userRole: any }) => {
   const [inputMessage, setInputMessage] = useState("");
 
   useEffect(() => {
+    // Register user role on connection
+    socket.emit("register_role", { role: userRole });
+
     //3
     // Listen for new notifications from the server
     socket.on("send_notification", (newNotification) => {
@@ -30,7 +33,7 @@ export const Header = ({ userRole }: { userRole: any }) => {
     return () => {
       socket.off("send_notification"); // Cleanup listener on unmount
     };
-  }, []);
+  }, [userRole]);
 
   const handleAddEvent = () => {
     if (!inputMessage.trim()) return;
