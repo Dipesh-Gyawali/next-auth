@@ -25,6 +25,7 @@ export const Header = () => {
     };
     console.log(data, "kkkkkkkkk");
     setNotification((prev) => [...prev, data]);
+    setCount(notification.length);
     setInputMessage("");
   };
 
