@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 
 export const Header = () => {
-  const twid = Date.now().toString();
   const [notification, setNotification] = useState([
     { id: "1", notificationMsg: "This is tihar event" },
     { id: "2", notificationMsg: "This is dashain event" },
@@ -17,39 +16,41 @@ export const Header = () => {
   ]);
   const [count, setCount] = useState(notification.length);
   const [inputMessage, setInputMessage] = useState("");
-  const [notice, setNotice] = useState("");
 
   useEffect(() => {
-    socket.emit("send_notification", notification);
+    // Listen for new notifications from the server
+    socket.on("send_notification", (newNotification) => {
+      setNotification((prev) => [...prev, newNotification]);
+      setCount((prevCount) => prevCount + 1);
+    });
 
-    // socket.on("send_notification", (msg) => {
-    //   setNotice(msg);
-    // });
+    return () => {
+      socket.off("send_notification"); // Cleanup listener on unmount
+    };
   }, []);
 
   const handleAddEvent = () => {
     if (!inputMessage.trim()) return;
-    const data = {
-      id: twid,
+    const newNotification = {
+      id: Date.now().toString(),
       notificationMsg: inputMessage,
     };
-    console.log(data, "kkkkkkkkk");
-    setNotification((prev) => [...prev, data]);
-    setCount(notification.length);
-    console.log(notification, "xxxxxxxxxx");
-    socket.emit("send_notification", notification);
-    // setInputMessage("");
+
+    // Emit only the new notification
+    socket.emit("send_notification", newNotification);
+
+    setInputMessage(""); // Clear input after sending
   };
-  //   console.log(notice, "nnnnnnnn");
 
   return (
     <nav className="bg-blue-200 p-3 flex flex-row items-center justify-end gap-5">
       <div className="flex flex-row items-center justify-center">
-        {/* input from admin */}
+        {/* Input for admin */}
         <div className="flex flex-row gap-4 mt-5">
           <input
             type="text"
             className="border border-black-500 rounded-md"
+            value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
           />
           <button
@@ -68,14 +69,12 @@ export const Header = () => {
               </div>
             </PopoverTrigger>
             <PopoverContent>
-              {notification.map((item, index) => {
-                return (
-                  <ul key={index + 1}>
-                    <li>{item.notificationMsg}</li>
-                    <hr></hr>
-                  </ul>
-                );
-              })}
+              {notification.map((item, index) => (
+                <ul key={item.id}>
+                  <li>{item.notificationMsg}</li>
+                  <hr />
+                </ul>
+              ))}
             </PopoverContent>
           </Popover>
         </div>

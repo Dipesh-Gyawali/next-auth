@@ -16,10 +16,10 @@ app.prepare().then(() => {
   io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    socket.on("send_notification", (msg) => {
-      console.log(msg, "555555");
-      console.log({ msg }, "666666");
-      io.emit("send_notification", msg);
+    // Handle new notifications and broadcast them
+    socket.on("send_notification", (newNotification) => {
+      console.log("New notification:", newNotification);
+      io.emit("send_notification", newNotification); // Broadcast to all clients
     });
 
     socket.on("disconnect", () => {
