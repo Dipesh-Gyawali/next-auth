@@ -21,7 +21,7 @@ const SettingsPage = async () => {
           </pre>
         </div>
         <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
-          <span className="font-medium text-gray-700">
+          <span className="font-medium text-gray-700 ml-2">
             Two-Factor Authentication:
           </span>{" "}
           {session?.user.isTwoFactorEnabled ? (

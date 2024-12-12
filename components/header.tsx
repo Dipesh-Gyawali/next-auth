@@ -51,7 +51,7 @@ export const Header = ({ userRole }: { userRole: any }) => {
       <div className="flex flex-row items-center gap-6">
         {/* Input for admin */}
         {userRole === "ADMIN" && (
-          <div className="flex flex-row gap-4 items-center">
+          <div className="flex flex-row gap-4 items-center max-sm:flex-wrap">
             <input
               type="text"
               className="border border-gray-400 rounded-md p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
