@@ -12,10 +12,26 @@ import { FaCommentDots } from "react-icons/fa";
 export const Header = ({ userRole }: { userRole: any }) => {
   console.log(userRole, "mmmmmmmmmmmmmmmmmmmmmm");
   const [notification, setNotification] = useState([
-    { id: "1", notificationMsg: "This is tihar event" },
-    { id: "2", notificationMsg: "This is dashain event" },
-    { id: "3", notificationMsg: "This is holi event" },
+    {
+      id: "1",
+      notificationMsg: "We will celebrate in Hyatt Hotel",
+      eventName: "Tihar Event",
+      eventDate: "12/13/2024",
+    },
+    {
+      id: "2",
+      notificationMsg: "We will celebrate in Yak and Yeti",
+      eventName: "WEN Event",
+      eventDate: "12/14/2024",
+    },
+    {
+      id: "3",
+      notificationMsg: "We will celebrate in Hotel Annapurna",
+      eventName: "Holi Event",
+      eventDate: "12/15/2024",
+    },
   ]);
+
   const [count, setCount] = useState(notification.length);
   const [inputMessage, setInputMessage] = useState("");
 
@@ -98,7 +114,19 @@ export const Header = ({ userRole }: { userRole: any }) => {
               notification.map((item, index) => (
                 <ul key={item.id} className="mb-2">
                   <li className="text-sm text-gray-700">
-                    {item.notificationMsg}
+                    Event name:{item.eventName}{" "}
+                  </li>
+                  <li className="text-sm text-gray-700">
+                    Event date:{item.eventDate}{" "}
+                  </li>
+                  <li
+                    className="text-sm text-gray-700"
+                    aria-describedby="event desc"
+                  >
+                    Event desc: {item.notificationMsg}
+                  </li>
+                  <li className="text-sm text-gray-700">
+                    Published date: {Date.now()}
                   </li>
                   {index < notification.length - 1 && (
                     <hr className="my-2 border-gray-300" />
