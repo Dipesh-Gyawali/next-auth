@@ -5,6 +5,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { socket } from "@/lib/socketClient";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { FaCommentDots } from "react-icons/fa";
@@ -13,22 +14,25 @@ export const Header = ({ userRole }: { userRole: any }) => {
   console.log(userRole, "mmmmmmmmmmmmmmmmmmmmmm");
   const [notification, setNotification] = useState([
     {
-      id: "1",
+      id: "9840031",
       notificationMsg: "We will celebrate in Hyatt Hotel",
       eventName: "Tihar Event",
       eventDate: "12/13/2024",
+      publishedDate: "11111",
     },
     {
-      id: "2",
+      id: "98400312",
       notificationMsg: "We will celebrate in Yak and Yeti",
       eventName: "WEN Event",
       eventDate: "12/14/2024",
+      publishedDate: "2222",
     },
     {
-      id: "3",
+      id: "98400313",
       notificationMsg: "We will celebrate in Hotel Annapurna",
       eventName: "Holi Event",
       eventDate: "12/15/2024",
+      publishedDate: "3333",
     },
   ]);
 
@@ -63,6 +67,7 @@ export const Header = ({ userRole }: { userRole: any }) => {
       notificationMsg: eventDescription,
       eventName: eventName,
       eventDate: eventDate,
+      publishedDate: new Date().toISOString(), // Stable timestamp
     };
 
     //3
@@ -134,26 +139,29 @@ export const Header = ({ userRole }: { userRole: any }) => {
           <PopoverContent className="bg-white p-4 shadow-lg rounded-lg w-72 border border-gray-200">
             {notification.length > 0 ? (
               notification.map((item, index) => (
-                <ul key={item.id} className="mb-2">
-                  <li className="text-sm text-gray-700">
-                    Event name:{item.eventName}{" "}
-                  </li>
-                  <li className="text-sm text-gray-700">
-                    Event date:{item.eventDate}{" "}
-                  </li>
-                  <li
-                    className="text-sm text-gray-700"
-                    aria-describedby="event desc"
-                  >
-                    Event desc: {item.notificationMsg}
-                  </li>
-                  <li className="text-sm text-gray-700">
-                    Published date: {Date.now()}
-                  </li>
-                  {index < notification.length - 1 && (
-                    <hr className="my-2 border-gray-300" />
-                  )}
-                </ul>
+                <Link key={item.id} href={`/notification/${item.id}`}>
+                  <ul className="mb-2 cursor-pointer">
+                    <li className="text-sm text-gray-700">
+                      Event name:{item.eventName}{" "}
+                    </li>
+                    <li className="text-sm text-gray-700">
+                      Event date:{item.eventDate}{" "}
+                    </li>
+                    <li
+                      className="text-sm text-gray-700"
+                      aria-describedby="event desc"
+                    >
+                      Event desc: {item.notificationMsg}
+                    </li>
+                    <li className="text-sm text-gray-700">
+                      Published date:{" "}
+                      {new Date(item.publishedDate).toLocaleString()}
+                    </li>
+                    {index < notification.length - 1 && (
+                      <hr className="my-2 border-gray-300" />
+                    )}
+                  </ul>
+                </Link>
               ))
             ) : (
               <p className="text-sm text-gray-500">No new notifications</p>
