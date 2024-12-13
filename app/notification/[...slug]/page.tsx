@@ -8,8 +8,7 @@ export default async function NotificationDetailPage({
   const slug = (await params).slug;
 
   return (
-    <div>
-      <h1>Detail Notification</h1>
+    <div className="bg-[#E6F1FF] h-[100vh] w-[100vw]">
       {/* <div>My Post: {slug}</div> */}
       <NotificationDetail />
     </div>
