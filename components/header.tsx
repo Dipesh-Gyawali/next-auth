@@ -139,7 +139,10 @@ export const Header = ({ userRole }: { userRole: any }) => {
           <PopoverContent className="bg-white p-4 shadow-lg rounded-lg w-72 border border-gray-200">
             {notification.length > 0 ? (
               notification.map((item, index) => (
-                <Link key={item.id} href={`/notification/${item.id}`}>
+                <Link
+                  key={item.id}
+                  href={`/notification/${item.id}/${item.eventName}/${item.notificationMsg}/${item.eventDate}/${item.publishedDate}`}
+                >
                   <ul className="mb-2 cursor-pointer">
                     <li className="text-sm text-gray-700">
                       Event name:{item.eventName}{" "}

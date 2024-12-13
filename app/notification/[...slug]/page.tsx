@@ -6,10 +6,11 @@ export default async function NotificationDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const slug = (await params).slug;
+
   return (
     <div>
       <h1>Detail Notification</h1>
-      <div>My Post: {slug}</div>
+      {/* <div>My Post: {slug}</div> */}
       <NotificationDetail />
     </div>
   );
