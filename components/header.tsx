@@ -61,7 +61,7 @@ export const Header = ({ userRole }: UserRoleProps) => {
 
     //4
     socket.on("send_notification", (newNotification) => {
-      setNotification((prev) => [...prev, newNotification]);
+      setNotification((prev) => [newNotification, ...prev]);
       setCount((prevCount) => prevCount + 1);
     });
 
