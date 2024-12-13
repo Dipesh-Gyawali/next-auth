@@ -149,7 +149,7 @@ export const Header = ({ userRole }: UserRoleProps) => {
             </div>
           </PopoverTrigger>
 
-          <PopoverContent className="bg-white p-4 shadow-lg rounded-lg w-72 border border-gray-200">
+          <PopoverContent className="bg-white p-4 shadow-lg rounded-lg w-72 border border-gray-200 max-h-[300px] overflow-y-auto">
             {notification.length > 0 ? (
               notification.map((item, index) => (
                 <Link
