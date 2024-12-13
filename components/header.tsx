@@ -55,6 +55,7 @@ export const Header = ({ userRole }: { userRole: any }) => {
 
     return () => {
       socket.off("send_notification");
+      socket.off("register_role");
     };
   }, [userRole]);
 
