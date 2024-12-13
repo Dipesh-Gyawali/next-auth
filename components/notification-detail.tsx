@@ -10,10 +10,10 @@ export const NotificationDetail = () => {
   const urlArray = urlFromRoute.split("/");
   console.log(urlArray, "uuuuu");
 
-  // Decode each slug segment
+  //the url gives %% in space so....
   const decodedSlug = urlArray.map((part) => decodeURIComponent(part));
 
-  // Extract and format the Published Date
+  //making date readable : December 13, 2024 at 01:06:32 PM
   const publishedDateRaw = decodedSlug[6];
   const formattedPublishedDate = publishedDateRaw
     ? new Date(publishedDateRaw).toLocaleDateString("en-US", {
