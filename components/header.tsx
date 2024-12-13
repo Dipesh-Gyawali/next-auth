@@ -145,10 +145,10 @@ export const Header = ({ userRole }: { userRole: any }) => {
                   href={`/notification/${item.id}/${item.eventName}/${item.notificationMsg}/${item.eventDate}/${item.publishedDate}`}
                 >
                   <ul className="mb-2 cursor-pointer">
-                    <li className="text-sm text-gray-700">
-                      Event name:{item.eventName}{" "}
+                    <li className="text-sm text-gray-700 font-semibold truncate">
+                      {item.eventName}{" "}
                     </li>
-                    <li className="text-sm text-gray-700">
+                    <li className="text-sm text-gray-700 ">
                       Event date:{item.eventDate}{" "}
                     </li>
                     <li
