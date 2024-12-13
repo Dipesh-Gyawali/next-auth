@@ -33,7 +33,9 @@ export const Header = ({ userRole }: { userRole: any }) => {
   ]);
 
   const [count, setCount] = useState(notification.length);
-  const [inputMessage, setInputMessage] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [eventDate, setEventDate] = useState("");
 
   useEffect(() => {
     //sending notification to all users except admin
@@ -53,16 +55,22 @@ export const Header = ({ userRole }: { userRole: any }) => {
   }, [userRole]);
 
   const handleAddEvent = () => {
-    if (!inputMessage.trim()) return;
+    if (!eventName.trim() || !eventDescription.trim() || !eventDate.trim())
+      return;
+
     const newNotification = {
       id: Date.now().toString(),
-      notificationMsg: inputMessage,
+      notificationMsg: eventDescription,
+      eventName: eventName,
+      eventDate: eventDate,
     };
 
     //3
     socket.emit("send_notification", newNotification);
 
-    setInputMessage(""); // Clear input after sending
+    setEventName(""); // Clear input after sending
+    setEventDescription("");
+    setEventDate("");
   };
 
   return (
@@ -74,9 +82,23 @@ export const Header = ({ userRole }: { userRole: any }) => {
             <input
               type="text"
               className="border border-gray-400 rounded-md p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-              placeholder="Enter event message"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
+              placeholder="Enter event name"
+              value={eventName}
+              onChange={(e) => setEventName(e.target.value)}
+            />
+            <input
+              type="text"
+              className="border border-gray-400 rounded-md p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+              placeholder="Enter event description"
+              value={eventDescription}
+              onChange={(e) => setEventDescription(e.target.value)}
+            />
+            <input
+              type="text"
+              className="border border-gray-400 rounded-md p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+              placeholder="Enter event date"
+              value={eventDate}
+              onChange={(e) => setEventDate(e.target.value)}
             />
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition-all duration-200"
