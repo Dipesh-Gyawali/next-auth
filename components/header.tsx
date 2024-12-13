@@ -18,21 +18,21 @@ export const Header = ({ userRole }: { userRole: any }) => {
       notificationMsg: "We will celebrate in Hyatt Hotel",
       eventName: "Tihar Event",
       eventDate: "12/13/2024",
-      publishedDate: "11111",
+      publishedDate: "",
     },
     {
       id: "98400312",
       notificationMsg: "We will celebrate in Yak and Yeti",
       eventName: "WEN Event",
       eventDate: "12/14/2024",
-      publishedDate: "2222",
+      publishedDate: "",
     },
     {
       id: "98400313",
       notificationMsg: "We will celebrate in Hotel Annapurna",
       eventName: "Holi Event",
       eventDate: "12/15/2024",
-      publishedDate: "3333",
+      publishedDate: "",
     },
   ]);
 
