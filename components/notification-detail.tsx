@@ -18,13 +18,8 @@ export const NotificationDetail = () => {
       <div>
         <p>Event Name: {decodedSlug[3]}</p>
         <p>Event Description: {decodedSlug[4]}</p>
-        <p>
-          Event Date: {decodedSlug[5]}/{decodedSlug[6]}/{decodedSlug[7]}
-        </p>
-        <p>Published Date: {decodedSlug[8]}</p>
-        <p>
-          Extra: {decodedSlug[1]}, {decodedSlug[2]}{" "}
-        </p>
+        <p>Event Date: {decodedSlug[5]}</p>
+        <p>Published Date: {decodedSlug[6]}</p>
       </div>
     </div>
   );

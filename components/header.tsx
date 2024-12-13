@@ -99,7 +99,7 @@ export const Header = ({ userRole }: { userRole: any }) => {
               onChange={(e) => setEventDescription(e.target.value)}
             />
             <input
-              type="text"
+              type="date"
               className="border border-gray-400 rounded-md p-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
               placeholder="Enter event date"
               value={eventDate}
