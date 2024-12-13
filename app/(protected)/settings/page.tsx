@@ -9,7 +9,7 @@ const SettingsPage = async () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-6">
-      <Header userRole={session?.user?.role} />
+      {session?.user.role && <Header userRole={session?.user?.role} />}
 
       <div className="max-w-2xl mx-auto mt-6 p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold text-gray-700 mb-4">

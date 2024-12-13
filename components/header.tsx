@@ -10,9 +10,21 @@ import { useEffect, useState } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { FaCommentDots } from "react-icons/fa";
 
-export const Header = ({ userRole }: { userRole: any }) => {
+interface Notification {
+  id: string;
+  notificationMsg: string;
+  eventName: string;
+  eventDate: string;
+  publishedDate: string;
+}
+
+interface UserRoleProps {
+  userRole: string;
+}
+
+export const Header = ({ userRole }: UserRoleProps) => {
   console.log(userRole, "mmmmmmmmmmmmmmmmmmmmmm");
-  const [notification, setNotification] = useState([
+  const [notification, setNotification] = useState<Notification[]>([
     {
       id: "9840031",
       notificationMsg: "We will celebrate in Hyatt Hotel",
@@ -36,10 +48,10 @@ export const Header = ({ userRole }: { userRole: any }) => {
     },
   ]);
 
-  const [count, setCount] = useState(notification.length);
-  const [eventName, setEventName] = useState("");
-  const [eventDescription, setEventDescription] = useState("");
-  const [eventDate, setEventDate] = useState("");
+  const [count, setCount] = useState<number>(notification.length);
+  const [eventName, setEventName] = useState<string>("");
+  const [eventDescription, setEventDescription] = useState<string>("");
+  const [eventDate, setEventDate] = useState<string>("");
 
   useEffect(() => {
     //sending notification to all users except admin
